@@ -5,7 +5,7 @@ pipeline {
         // This must match the Name of the Maven installation configured in Jenkins 
         // under Global Tool Configuration (Manage Jenkins -> Tools)
         maven 'Maven 3.9' 
-        jdk 'Java 21'
+        jdk 'Java 17'
     }
 
     environment {
