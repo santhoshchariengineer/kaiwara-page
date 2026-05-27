@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Kaiwara | Myth, Spirituality & Adventure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9fb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            font-weight: 300;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+        }
+
+        nav a {
+            color: #4a5568;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #dd6b20;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 80px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: #dd6b20;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .weather-banner {
+            background: linear-gradient(135deg, #2b6cb0, #4299e1);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+        }
+
+        .weather-info h4 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .weather-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .intro-box {
+            background-color: #fff;
+            border-left: 5px solid #dd6b20;
+            padding: 25px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 50px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .card-content p {
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .route-planner {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        /* Form Controls & Layout styles */
+        .form-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: #f7fafc;
+        }
+
+        .btn-calc {
+            background-color: #dd6b20;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-calc:hover {
+            background-color: #c05621;
+        }
+
+        .route-result, .booking-result {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f7fafc;
+            border-radius: 6px;
+            border-left: 4px solid #319795;
+            display: none;
+        }
+
+        .booking-result {
+            border-left-color: #dd6b20;
+            background-color: #fffaf0;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .info-table th, .info-table td {
+            padding: 15px 20px;
+            text-align: left;
+        }
+
+        .info-table th {
+            background-color: #ee5a24;
+            color: white;
+            font-weight: 600;
+        }
+
+        .info-table tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+
+        .guidelines {
+            background-color: #fffeb3;
+            border: 1px solid #ffe566;
+            padding: 25px;
+            border-radius: 8px;
+            color: #5c4300;
+        }
+
+        .guidelines h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .guidelines ul {
+            list-style-type: '✓ ';
+            margin-left: 20px;
+        }
+
+        .guidelines li {
+            margin-bottom: 8px;
+        }
+
+        .developer-section {
+            background-color: #fff;
+            padding: 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            max-width: 600px;
+            margin: 60px auto 20px auto;
+        }
+
+        .dev-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #dd6b20;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .developer-section h3 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .dev-tag {
+            color: #dd6b20;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .dev-bio {
+            color: #4a5568;
+            font-size: 1rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background-color: #2d3748;
+            color: #a0aec0;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.3rem; }
+            header p { font-size: 1rem; }
+            nav { flex-direction: column; align-items: center; }
+            nav a { margin: 8px 0; }
+            .weather-banner { flex-direction: column; text-align: center; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Explore Kaiwara</h1>
+        <p>A journey into the heart of Karnataka's vibrant mythology, serene spirituality, and breathtaking rocky landscapes.</p>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#attractions">Key Attractions</a>
+        <a href="#travel-info">Travel Guide</a>
+        <a href="#bookings">Trust Bookings</a>
+    </nav>
+
+    <div class="container">
+        
+        <div class="weather-banner">
+            <div class="weather-info">
+                <h4>Kaiwara Hill Conditions Today</h4>
+                <p>Current Estimate: 28°C • Sunny Skies • Excellent trail visibility.</p>
+            </div>
+            <div class="weather-badge">
+                🏃 Best Hiking Windows: Before 11:00 AM
+            </div>
+        </div>
+
+        <section id="about">
+            <div class="intro-box">
+                <strong>Historical Tapestry:</strong> Historically known as <em>Ekachakrapura</em> in the Dwapara-yuga, Kaiwara is the epic ground where the Pandavas lived incognito during exile, and where the mighty Bhima defeated the demon Bakasura. In modern times, it is revered as the divine seat of saint-poet Yogi Kaiwara Narayana Taatha.
+            </div>
+        </section>
+
+        <section id="attractions">
+            <h2 class="section-title">Major Attractions</h2>
+            <p class="subtitle">What makes Kaiwara a perfect day-trip escape from the city.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Sri Amara Narayana Temple</h3>
+                        <p>A breathtaking temple dedicated to Lord Vishnu, closely connected with the history of Satya-yuga and later beautifully constructed/renovated during the Vijayanagara Empire. Features incredibly intricate granite stone pillar carvings.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Yogi Narayana Ashram</h3>
+                        <p>An ashram dedicated to the great bilingual poet-saint Thataiyya (1726–1836). It remains a focal point for spiritual, religious, and philanthropic work where free mass meals are served daily to visitors.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Kaiwara Betta (Trek)</h3>
+                        <p>Managed safely by the Forest Department (bookable on MyEcoTrip), this moderately challenging rock trail climbs past massive granite boulders up to the spectacular Mylapurabetta Viewpoint. Great for nature lovers.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Bhima Bakasura Hill & Cave</h3>
+                        <p>A rocky hill containing the historical Bheemalingeshwara temple. Mythological lore asserts that a cave here holds the remnants of the demon Bakasura, adding an intriguing atmosphere for history buffs.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Kailasha Giri Cave Temples</h3>
+                        <p>Located roughly 7 km away from the main town, this hill is famous for its massive cave temples carved right out of rocks, containing shrines like Ambaji Durga and Chenna Keshava.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Lakshmana Tirtha</h3>
+                        <p>Situated atop the hill, local lore says Lakshmana shot an arrow into the ground to fetch water to quench Sita's thirst, forming a pristine, historic pool alongside a temple to Chamundeshwari Devi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="travel-info">
+            <h2 class="section-title">Traveler's Dashboard</h2>
+            <p class="subtitle">Quick details to seamlessly plan your weekend itinerary.</p>
+            
+            <div class="route-planner">
+                <h3 style="margin-bottom: 15px; color: #2d3748;">📍 Smart Route & Travel Planner</h3>
+                <div class="form-group">
+                    <label for="routeSelect">Select Your Starting Point / Route:</label>
+                    <select id="routeSelect" class="form-control">
+                        <option value="hoskote">Via Old Madras Road (KR Puram -> Hoskote -> Chintamani Road)</option>
+                        <option value="devanahalli">Via NH 44 (Hebbal -> Devanahalli -> Vijayapura Route)</option>
+                        <option value="railway">Via Chikkaballapur Train Station Terminal</option>
+                    </select>
+                </div>
+                <button class="btn-calc" onclick="calculateRoute()">Generate Route Summary</button>
+
+                <div id="routeResult" class="route-result">
+                    <h4 id="resultTitle" style="color: #2c5282; margin-bottom: 8px;"></h4>
+                    <p id="resultDetails" style="color: #4a5568;"></p>
+                </div>
+            </div>
+
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Distance</strong></td>
+                        <td>~70 km from Bengaluru city limits (approx. 1.5 to 2 hours drive)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best Routes</strong></td>
+                        <td>Bengaluru - Hoskote Route OR Bengaluru - Devanahalli - Vijayapura Route</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nearest Railway</strong></td>
+                        <td>Chikkaballapur Junction (Local buses and autos ply regularly to the foothill)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best Time to Visit</strong></td>
+                        <td>Early morning (October to March) to beat the scorching afternoon sun on the rocks</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br><br>
+
+            <div class="guidelines">
+                <h3>⚠️ Tips for a Safe & Impactful Visit</h3>
+                <ul>
+                    <li><strong>Monkeys Ahead:</strong> Watch your backpacks, food items, and gadgets safely as local monkeys are very active.</li>
+                    <li><strong>Strictly No Littering:</strong> Carry a small garbage collection bag with you to protect the eco-sensitive forest reserves.</li>
+                    <li><strong>Footwear Matters:</strong> Wear strong trekking shoes with solid grip; granite boulders get extremely slick after rain showers.</li>
+                    <li><strong>Timing Strategy:</strong> Try to scale the hills before 11:00 AM as the bare rocks capture and radiate intense thermal heat.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- New Feature: Temple Administration Bookings Section -->
+        <section id="bookings">
+            <h2 class="section-title">Trust Booking Portal</h2>
+            <p class="subtitle">Coordinate wedding arrangements, convention halls, and choultry rooms via Sri Yogi Narayana Yatindra Ashrama Trust.</p>
+            
+            <div class="route-planner">
+                <h3 style="margin-bottom: 20px; color: #2d3748;">📋 Wedding Venue & Lodging Availability Request</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hallSelect">Convention Hall (Kalyana Mantapa):</label>
+                        <select id="hallSelect" class="form-control">
+                            <option value="kala_kshethra">Yogi Narayana Kala Kshethra (Grand Hall)</option>
+                            <option value="sabhangana">Sri Yoginareyana Sabhangana (Mid-Sized Complex)</option>
+                            <option value="nandini">Nandini Bhavana / Trust Overflow Halls</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDate">Target Event Date:</label>
+                        <input type="date" id="eventDate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="roomCount">Guest Rooms Needed:</label>
+                        <input type="number" id="roomCount" class="form-control" min="0" max="100" value="5" placeholder="e.g. 10">
+                    </div>
+                    <div class="form-group">
+                        <label for="roomType">Room Tier:</label>
+                        <select id="roomType" class="form-control">
+                            <option value="non_ac">Standard Non-AC Pilgrim Dorm/Room</option>
+                            <option value="ac">Premium AC Guest Suite</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn-calc" onclick="processBookingInquiry()">Generate Booking Summary</button>
+
+                <div id="bookingResult" class="booking-result">
+                    <h4 id="bookingTitle" style="color: #c05621; margin-bottom: 10px;"></h4>
+                    <div id="bookingDetails" style="color: #4a5568; font-size: 0.95rem;"></div>
+                    <p style="margin-top: 15px; font-size: 0.85rem; color: #718096; font-style: italic;">
+                        🚩 Note: Official wedding allocations must be finalized in person or via direct desk tokens at the Trust Counter to avoid traditional calendar date clashing.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="developer-section">
+            <img src="image0.png" alt="Santhosh S" class="dev-avatar">
+            <h3>Santhosh S</h3>
+            <span class="dev-tag">Lead Website Developer</span>
+            <p class="dev-bio">Proudly hailing from Kaiwara. Bringing local history, rich mythology, and beautiful landscapes to life through modern web engineering.</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Kaiwara Tourism Exploration Portal.</p>
+        <p>Crafted to preserve local heritage, history, and natural wanderlust.</p>
+    </footer>
+
+    <script>
+        function calculateRoute() {
+            const selection = document.getElementById('routeSelect').value;
+            const resultBox = document.getElementById('routeResult');
+            const title = document.getElementById('resultTitle');
+            const details = document.getElementById('resultDetails');
+
+            resultBox.style.display = "block";
+
+            if(selection === 'hoskote') {
+                title.innerText = "🚗 Route Profile: Hoskote & Chintamani Road";
+                details.innerHTML = "<strong>Estimated Time:</strong> 1 hr 45 mins (68 km)<br><strong>Road Condition:</strong> Excellent four-lane highway up to Hoskote, followed by clear state highway roads.<br><strong>Food Stops:</strong> Plenty of popular breakfast spots along the Old Madras Road highway.";
+            } else if(selection === 'devanahalli') {
+                title.innerText = "🚗 Route Profile: Devanahalli Bypass & Vijayapura";
+                details.innerHTML = "<strong>Estimated Time:</strong> 2 hrs (75 km)<br><strong>Road Condition:</strong> Highly scenic highway drive past the International Airport toll, transitioning into pleasant rural bypass tracks.<br><strong>Pro-Tip:</strong> Great route if you are starting from North Bengaluru (Hebbal/Yelahanka).";
+            } else if(selection === 'railway') {
+                title.innerText = "🚂 Transit Profile: Chikkaballapur Terminal Link";
+                details.innerHTML = "<strong>Estimated Time:</strong> 40 mins from station (27 km)<br><strong>Connectivity:</strong> Once you alight at Chikkaballapur, local KSRTC buses and shared auto options drop directly to the Kaiwara foothills regularly.";
+            }
+        }
+
+        function processBookingInquiry() {
+            const hall = document.getElementById('hallSelect').value;
+            const date = document.getElementById('eventDate').value;
+            const rooms = parseInt(document.getElementById('roomCount').value) || 0;
+            const roomType = document.getElementById('roomType').value;
+
+            const resultBox = document.getElementById('bookingResult');
+            const title = document.getElementById('bookingTitle');
+            const details = document.getElementById('bookingDetails');
+
+            if (!date) {
+                alert("Please select a valid event date first!");
+                return;
+            }
+
+            resultBox.style.display = "block";
+            title.innerText = "✨ Generated Trust Booking Intent Summary";
+
+            let hallName = "";
+            let capacity = "";
+            if (hall === 'kala_kshethra') {
+                hallName = "Yogi Narayana Kala Kshethra";
+                capacity = "Large wedding assembly space with extensive seating capacity.";
+            } else if (hall === 'sabhangana') {
+                hallName = "Sri Yoginareyana Sabhangana";
+                capacity = "Mid-sized indoor banquet assembly space (approx. 250-400 capacity).";
+            } else {
+                hallName = "Nandini Bhavana Complex";
+                capacity = "Standard backup choultry configuration.";
+            }
+
+            let roomCostPerDay = roomType === 'ac' ? 1200 : 500;
+            let totalEstRoomCost = rooms * roomCostPerDay;
+            let tierLabel = roomType === 'ac' ? "Premium AC Suites" : "Standard Non-AC Rooms";
+
+            details.innerHTML = `
+                <strong>Selected Venue:</strong> ${hallName} (${capacity})<br>
+                <strong>Requested Reservation Date:</strong> ${date}<br>
+                <strong>Lodging Requirements:</strong> ${rooms} x ${tierLabel}<br>
+                <strong>Estimated Trust Lodging Contribution:</strong> ₹${totalEstRoomCost} / day<br><br>
+                <strong>Next Administrative Step:</strong> Present this brief to the main <em>Sri Yogi Narayana Yatindra Ashrama Trust Office</em> counter at Kaiwara to lock down seasonal availability tokens.
+            `;
+        }
+    </script>
+</body>
+</html>
